@@ -2,8 +2,17 @@ import express from "express"
 
 const router = express();
 
-router.get("/", (req, res) => {
+router.use(express.json());
+router
+.get("/", (req, res) => {
     res.send("Hello Node")
+}).post("/", (req, res) => {
+    console.log(req.body);
+    const { name, email, phone } = req.body;
+    if (!name || !email || !phone) {
+        return res.send("Not Necessary Informaion!")
+    } 
+    return res.send("GOOD")
 });
 
 router.get("/test", (req, res) => {
